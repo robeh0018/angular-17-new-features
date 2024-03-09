@@ -1,0 +1,87 @@
+<app-title title="Control flow" withShadow/>
+
+
+<!--@if-->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-3">
+
+  <div class="bg-white rounded shadow p-10">
+
+    <h2 class="text-2xl font-bold mb-5">if: {{ showContent() }}</h2>
+
+    <button
+      class="p-2 bg-blue-800 rounded text-white hover:bg-blue-600 transition-all"
+      (click)="toggleContent()"
+    >
+      Click me
+    </button>
+    <div class="my-5">
+
+
+      @if (showContent()) {
+        <p>Hello world!</p>
+      } @else {
+        <p>**********</p>
+      }
+
+    </div>
+  </div>
+
+
+  <!--@switch-->
+  <div class="bg-white rounded shadow p-10">
+
+
+    @switch (grade()) {
+      @case ('A') {
+        <p>Up 90</p>
+      }
+      @case ('B') {
+        <p>Up 70</p>
+      }
+      @case ('F') {
+        <p>Suspended</p>
+      }
+    }
+
+  </div>
+
+  <!--@for-->
+  <div class="bg-white rounded shadow p-10">
+
+    <ul>
+      @for (framework of frameworks(); track framework;
+        let i = $index, first = $first, last = $last, even = $even, odd = $odd, count = $count) {
+
+        <li [class]="{
+         'bg-red-100': even && !first && !last,
+         'bg-pink-100': odd && !first && !last,
+         'bg-blue-100':first || last,
+
+         }"
+        >{{ i }} - {{ framework }}
+        </li>
+
+      }
+    </ul>
+
+
+  </div>
+
+
+  <!--@empty-->
+  <div class="bg-white rounded shadow p-10">
+
+
+    <ul>
+      @for (framework of frameworks2(); track $index) {
+
+        <li>{{ framework }}</li>
+
+      } @empty {
+        <li class="text-red-500">There is not frameworks on this list.</li>
+      }
+    </ul>
+  </div>
+
+</section>
+
